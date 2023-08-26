@@ -53,9 +53,9 @@ if (!liff.isLoggedIn()) {
 return (
     <div className="App">
         <div className="App-container">
-            <h1 className="text-3xl font-bold underline text-red-600">
+            {/* <h1 className="text-3xl font-bold underline text-red-600">
                 Hello world!
-            </h1>
+            </h1> */}
             <h1>日報ちゃん</h1>
             
             <button onClick={handleLogin}>ログイン</button>
@@ -68,7 +68,7 @@ return (
                 ):
                 (
                     <>
-                        <Link to="/home">Home</Link>
+                        {/* <Link to="/home">Home</Link> */}
                     </>
                 )
             }
