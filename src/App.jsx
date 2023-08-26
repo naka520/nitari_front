@@ -8,17 +8,17 @@ function App() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [route, setRoute] = useState('App');
-  const liffId = import.meta.env.VITE_LIFF_ID;
+  const liffId = "2000541888-bDrj80Gm";
 
   useEffect(() => {
-    console.log("LIFF ID from env:", import.meta.env.VITE_LIFF_ID); // これを追加
+    console.log("LIFF ID from env:", "2000541888-bDrj80Gm"); // これを追加
     liff
       .init({
-        liffId: import.meta.env.VITE_LIFF_ID, // 環境変数からLIFF IDを取得
+        liffId: "2000541888-bDrj80Gm", // 環境変数からLIFF IDを取得
       })
       .then(() => {
         setMessage("LIFF init succeeded.");
-        console.log("LIFF ID from env:", import.meta.env.VITE_LIFF_ID); // これを追加
+        console.log("LIFF ID from env:", "2000541888-bDrj80Gm"); // これを追加
 
         // 既にログインしているか確認
         if (liff.isLoggedIn()) {
