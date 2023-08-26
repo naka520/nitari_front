@@ -10,6 +10,7 @@ function App() {
   const [route, setRoute] = useState('App');
 
   useEffect(() => {
+    console.log("LIFF ID from env:", import.meta.env.VITE_LIFF_ID); // これを追加
     liff
       .init({
         liffId: import.meta.env.VITE_LIFF_ID, // 環境変数からLIFF IDを取得
