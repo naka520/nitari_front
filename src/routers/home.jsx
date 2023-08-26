@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import DiaryCardList from '../components/DiaryCardList';
 
 function Home() {
     return(
@@ -10,6 +11,7 @@ function Home() {
         <div>
             <Link to="/">Login</Link>
         </div>
+        <DiaryCardList />
     </>
     );
 }
