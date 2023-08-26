@@ -8,6 +8,7 @@ function App() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
   const [route, setRoute] = useState('App');
+  const liffId = import.meta.env.VITE_LIFF_ID;
 
   useEffect(() => {
     console.log("LIFF ID from env:", import.meta.env.VITE_LIFF_ID); // これを追加
@@ -17,6 +18,7 @@ function App() {
       })
       .then(() => {
         setMessage("LIFF init succeeded.");
+        console.log("LIFF ID from env:", import.meta.env.VITE_LIFF_ID); // これを追加
 
         // 既にログインしているか確認
         if (liff.isLoggedIn()) {
@@ -52,12 +54,12 @@ function App() {
       <h1>日報ちゃん</h1>
      
       <button onClick={handleLogin}>ログイン</button>
-      {/* {message && <p>{message}</p>}
+      {message && <p>{message}</p>}
       {error && (
         <p>
           <code>{error}</code>
         </p>
-      )} */}
+      )}
       {route === 'notifications' && <div>お知らせページ</div>}
       </div>
     </div>
