@@ -27,7 +27,7 @@ function App() {
       })
       .catch((e) => {
         setMessage("LIFF init failed.");
-        setError(`${e}`);
+        setError(`Error: ${JSON.stringify(e)}`);
       });
   }, []); // useEffect内の処理はコンポーネントのマウント時に1回だけ実行
 
