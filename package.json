@@ -1,0 +1,22 @@
+{
+  "name": "nitari_front",
+  "version": "0.0.0",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@line/liff": "2.22.3",
+    "@mui/material": "^5.14.6",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-router-dom": "^6.15.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "4.0.4",
+    "vite": "4.4.9"
+  }
+}
