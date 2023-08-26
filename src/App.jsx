@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import liff from "@line/liff";
 import "./App.css";
 
+
+
 function App() {
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [route, setRoute] = useState('App');
 
   useEffect(() => {
     liff
@@ -28,9 +31,19 @@ function App() {
   const handleLogin = () => {
     if (!liff.isLoggedIn()) {
       // ログインしていない場合は、ログイン画面に遷移
-      liff.login();
+      liff
+      .login()
+      .then(() => {
+        // ログイン成功
+        setRoute('notifications'); // リダイレクト
+      })
+      .catch((err) => {
+        setMessage('LIFF login failed');
+        setError(err.toString());
+      });
     }
   };
+
 
   return (
     <div className="App">
@@ -44,6 +57,7 @@ function App() {
           <code>{error}</code>
         </p>
       )} */}
+      {route === 'notifications' && <div>お知らせページ</div>}
       </div>
     </div>
   );
