@@ -8,11 +8,11 @@ import axios from 'axios';
 
 function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
-  const [resultmessage, setResultmessage] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [userId, setUserId] = useState("");
   const [data, setData] = useState([]);
 
+  // Fetch data from the API
   const getData = async (inUserId, inAccessToken) => {
     const apiURL = "https://func-nitari-backend.azurewebsites.net/api/diary/all";
     try {
@@ -22,12 +22,13 @@ function Home() {
           'Authorization': inAccessToken,
         }
       });
-      setData([...data, response.data]);
+      setData(prevData => [...prevData, ...response.data]);
     } catch (error) {
-      console.error('Error:', error);
+      console.error('Error:', error.response || error);
     }
   };
 
+  // Initialize data when the component mounts
   useEffect(() => {
     async function init() {
       const value = await liff.getAccessToken();
@@ -39,6 +40,7 @@ function Home() {
     init();
   }, []);
 
+  // Toggle modal open/close
   const toggleModal = () => {
     setModalOpen(!isModalOpen);
   };
@@ -48,9 +50,7 @@ function Home() {
       <Header />
       <div className="flex flex-col items-center justify-center flex-1 bg-gradient-to-r from-blue-400 to-purple-500 p-4 lg:p-0">
         <div className="w-full max-w-2xl">
-          <div className="flex flex-col lg:flex-row justify-between items-center">
-            <h2 className="text-4xl font-semibold text-white mb-8 lg:mb-0">日報一覧</h2>
-          </div>
+          <h2 className="text-4xl font-semibold text-white mb-8 lg:mb-0">日報一覧</h2>
           <div className="flex space-x-4 mb-8 mt-4">
             <button onClick={toggleModal} className="px-4 py-2 w-full text-center bg-blue-500 text-white rounded-full hover:bg-blue-600 transition duration-300">
               作成
@@ -65,7 +65,7 @@ function Home() {
             <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
               <div className="bg-white rounded p-8">
               {
-                (accessToken !== null && userId !== null) ? 
+                (accessToken && userId) ? 
                   <Notice isModalOpen={isModalOpen} toggleModal={toggleModal} accessToken={accessToken} userId={userId} /> : 
                   null
               }
