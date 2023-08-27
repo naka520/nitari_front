@@ -3,7 +3,6 @@ import axios from 'axios';
 
 const Notice = ({ isModalOpen, toggleModal, accessToken, userId }) => {
   const [entries, setEntries] = useState([{ activity: '', feeling: '' }]);
-  const [userId, setUserId] = useState(''); // userIdのstateを追加
   const [date, setDate] = useState(''); // dateのstateを追加
   const [isLoading, setIsLoading] = useState(false);
 
