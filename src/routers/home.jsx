@@ -40,10 +40,13 @@ function Home() {
   }
 
   // Initialize data when the component mounts
-  useEffect(async () => {
-    const authInfo = liff.getProfile()
-    const isLogined = await liff.isLoggedIn(authInfo.userId)
-    await init();
+  useEffect(() => {
+    async function fetchData() {
+      const authInfo = await liff.getProfile()
+      const isLogined = await liff.isLoggedIn(authInfo.userId)
+      await init();
+    }
+    fetchData();
   }, []);
 
   // Toggle modal open/close

@@ -50,8 +50,8 @@ const Notice = ({ isModalOpen, toggleModal, accessToken, userId }) => {
       date: apiDate, // useStateのdateではなく、getTodayから取得したdateを使用
     }, {
       headers: {
-        'Authorization': accessToken,
         'Content-Type': 'application/json',
+        'Authorization': accessToken,
       }
     })
     .then((response) => {
