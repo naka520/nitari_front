@@ -1,4 +1,4 @@
-import { Link, useEffect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import DiaryCardList from '../components/DiaryCardList';
 import Header from "../components/header/CustomHeader";
