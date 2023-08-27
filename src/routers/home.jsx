@@ -31,7 +31,7 @@ function Home() {
 
   useEffect(() => {
     async function init() {
-      const value = liff.getAccessToken();
+      const value = await liff.getAccessToken();
       setAccessToken(value);
       const userInfo = await liff.getProfile();
       setUserId(userInfo.userId);
