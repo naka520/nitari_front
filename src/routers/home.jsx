@@ -63,8 +63,8 @@ function Home() {
     const value = liff.getAccessToken()
     setAccessToken(value);
     const userInfo = liff.getProfile()
-    setUserId("U0104fb8549d25cd6fd054347430affe5");
-    getData("U0104fb8549d25cd6fd054347430affe5", value)
+    setUserId("中屋敷楓");
+    getData("中屋敷楓", value)
   })
 
   
