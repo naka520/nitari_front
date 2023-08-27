@@ -33,6 +33,7 @@ import Header from "../components/header/CustomHeader";
 import Notice from '../components/Notice'; // Notice.jsxをインポート
 import { useEffect } from "react";
 import liff from "@line/liff";
+import {useState} from "react";
 
 function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -66,11 +67,9 @@ function Home() {
             <button onClick={toggleModal} className="px-4 py-2 w-full text-center bg-blue-500 text-white rounded-full hover:bg-blue-600 transition duration-300">
               作成
             </button>
-            <button className="px-4 py-2 w-full text-center bg-red-500 text-white rounded-full hover:bg-red-600 transition duration-300">
-            <Link to="/" >
-              ログイン
+            <Link to="/" className="px-4 py-2 w-full text-center bg-red-500 text-white rounded-full hover:bg-red-600 transition duration-300">
+              Login
             </Link>
-            </button>
           </div>
           <DiaryCardList />
 
