@@ -6,10 +6,10 @@ const DiaryCard = ({ date, detail }) => {
             <div className="relative pb-2/3">
             </div>
             <div className="p-6">
-                <p className="text-sm text-gray-900">{detail}</p>
                 <div className="mt-4 flex justify-between items-center">
                     <div className="text-xs text-gray-600">{date}</div>
                 </div>
+                <p className="text-sm text-gray-900">{detail}</p>
             </div>
         </div>
     );

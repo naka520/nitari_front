@@ -42,12 +42,12 @@ const Notice = ({ isModalOpen, toggleModal, accessToken, userId }) => {
 
     // const token = 'YOUR_ACCESS_TOKEN_HERE'; // 事前に取得したアクセストークン
     const url = 'https://func-nitari-backend.azurewebsites.net/api/diary'; // POSTするAPIのエンドポイント
-    const date = getToday();
+    const apiDate = getToday(); // 変数名を変更
 
-    const response = await axios.post(url, {
+    await axios.post(url, {
       userId: userId,
       tagDiaries: entries,
-      date: date,
+      date: apiDate, // useStateのdateではなく、getTodayから取得したdateを使用
     }, {
       headers: {
         'Authorization': accessToken,
@@ -108,7 +108,8 @@ const Notice = ({ isModalOpen, toggleModal, accessToken, userId }) => {
                     </div>
                   ) : (
                     <>
-                      <button onClick={() => postEntity} className="bg-green-500 text-white p-2 rounded ml-4">
+                      {/* onClickを修正 */}
+                      <button onClick={postEntity} className="bg-green-500 text-white p-2 rounded ml-4">
                         日報を投稿
                       </button>
                     </>

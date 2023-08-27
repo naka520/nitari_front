@@ -12,10 +12,10 @@ function Home() {
   const [userId, setUserId] = useState("");
   const [data, setData] = useState(null);
 
-  const getData = async (userId, accessToken) => {
+  const getData = async (inUserId, accessToken) => {
     const apiURL = "https://func-nitari-backend.azurewebsites.net/api/diary/all";
     try {
-        const response = await fetch(`${apiURL}?userId=${userId}`, {
+        const response = await fetch(`${apiURL}?userId=${inUserId}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
