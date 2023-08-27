@@ -11,9 +11,6 @@ const DiaryCard = ({ date, imageUrl, title, detail }) => {
                 <p className="text-sm text-gray-900">{detail}</p>
                 <div className="mt-4 flex justify-between items-center">
                     <div className="text-xs text-gray-600">{date}</div>
-                    <a href="#" className="text-xs bg-gray-500 text-white px-2 py-1 rounded-full hover:bg-gray-600">
-                        詳細を見る
-                    </a>
                 </div>
             </div>
         </div>
