@@ -4,6 +4,7 @@ import DiaryCardList from '../components/DiaryCardList';
 import Header from "../components/header/CustomHeader";
 import Notice from '../components/Notice'; 
 import liff from "@line/liff";
+import axios from 'axios';
 
 function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -15,17 +16,15 @@ function Home() {
   const getData = async (inUserId, inAccessToken) => {
     const apiURL = "https://func-nitari-backend.azurewebsites.net/api/diary/all";
     try {
-        const response = await fetch(`${apiURL}?userId=${inUserId}`, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/json',
-                'Authorization': inAccessToken,
-            }
-        });
-        const result = await response.json();
-        setData([...data, result]);
+      const response = await axios.get(`${apiURL}?userId=${inUserId}`, {
+        headers: {
+          'Accept': 'application/json',
+          'Authorization': inAccessToken,
+        }
+      });
+      setData([...data, response.data]);
     } catch (error) {
-        console.error('Error:', error);
+      console.error('Error:', error);
     }
   };
 
