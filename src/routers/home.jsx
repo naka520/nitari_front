@@ -40,13 +40,34 @@ function Home() {
   const[resultmessage,setResultmessage]=useState("");
   const[accessToken,setAccessToken] =useState("");
   const[userId, setUserId] = useState("");
+  const[data, setData] = useState(null);
 
-  useEffect(() => {
+  const getData = async (userId, accessToken) => {
+    const apiURL = "https://func-nitari-backend.azurewebsites.net/api/diary/all";
+    try {
+        const response = await fetch(`${apiURL}?userId=${userId}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Authorization': accessToken,
+            }
+        });
+        const data = await response.json();
+        setData(data);
+    } catch (error) {
+        console.error('Error:', error);
+    }
+  };
+
+  useEffect(async () => {
     const value = liff.getAccessToken()
     setAccessToken(value);
     const userInfo = liff.getProfile()
     setUserId(userInfo.userId);
+    getData(userInfo.userId, value)
   })
+
+  
 
 
   const toggleModal = () => {
@@ -74,7 +95,7 @@ function Home() {
               Login
             </Link>
           </div>
-          <DiaryCardList />
+          <DiaryCardList data={data} />
 
           {/* モーダルの表示 */}
           {isModalOpen && (

@@ -1,18 +1,21 @@
 import React from 'react';
 import DiaryCard from './DiaryCard';
+import { useEffect } from 'react';
 
-function DiaryCardList() {
+const DiaryCardList = ({ data }) => {
+
     return (
-    <div>
-        <DiaryCard
-        className="border"
-        date="2023-08-27"
-        imageUrl="https://example.com/image.jpg"
-        title="サンプルタイトル"
-        detail="これは詳細です。"
-        />
-    </div>
+        <>
+            {data.map((item, index) => (
+                <DiaryCard
+                className="border"
+                date={item.date}
+                detail={item.description}
+                />
+            ))}
+        </>
     );
-}
+};
+
 
 export default DiaryCardList;
