@@ -46,6 +46,7 @@ function Login() {
     }
     };
 
+   
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-gray-200">
             <div className="bg-white p-10 rounded-lg shadow-md">
@@ -55,17 +56,21 @@ function Login() {
                 </button>
                 {message && <p className="text-base">{message}</p>}
                 {
-                    error ? (
-                        <p className="bg-gray-200 p-2 rounded">
-                            <code>{error}</code>
-                        </p>
-                    ):
-                    (
-                        <>
-                        </>
+                     error ? (
+                        <div className="mt-4">
+                            <p className="bg-gray-200 p-2 rounded">
+                                <code>{error}</code>
+                            </p>
+                        </div>
+                    ) : (
+                        <div className="mt-10">
+                            <Link to="/home" className="px-10 py-4 ml-2 text-white bg-green-500 rounded hover:bg-gray-700 transition duration-300">
+                                Home
+                            </Link>
+                        </div>
                     )
+                
                 }
-                {route === 'notifications' && <div className="mt-4">お知らせページ</div>}
             </div>
         </div>
     );
