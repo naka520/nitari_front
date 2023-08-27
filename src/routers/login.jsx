@@ -51,7 +51,7 @@ function Login() {
         <div className="flex flex-col items-center justify-center h-screen bg-gray-200">
             <div className="bg-white p-10 rounded-lg shadow-md">
                 <h1 className="font-mono text-2xl text-gray-700">日報ちゃん</h1>
-                <button onClick={handleLogin} className="px-8 py-4 mt-4 text-white bg-green-500 rounded hover:bg-gray-700 transition duration-300">
+                <button onClick={handleLogin} className="px-8 py-4 mt-4 ml-2 text-white bg-green-500 rounded hover:bg-gray-700 transition duration-300">
                     ログイン
                 </button>
                 {message && <p className="text-base">{message}</p>}
