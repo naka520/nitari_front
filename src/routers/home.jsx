@@ -94,15 +94,14 @@ function Home() {
           </div>
           <DiaryCardList data={data} />
 
-          {/* モーダルの表示 */}
           {isModalOpen && (
             <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
               <div className="bg-white rounded p-8">
-              <Notice isModalOpen={isModalOpen} toggleModal={toggleModal} accessToken={accessToken} userId={userId} />
-
-                {/* <button onClick={toggleModal} className="float-right">
-                  ✖️
-                </button> */}
+              {
+                (accessToken !== null || userId !== null) ? 
+                  <Notice isModalOpen={isModalOpen} toggleModal={toggleModal} accessToken={accessToken} userId={userId} /> : 
+                  null
+              }
               </div>
             </div>
           )}
