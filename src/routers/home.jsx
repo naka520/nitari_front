@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import DiaryCardList from '../components/DiaryCardList';
 import Header from "../components/header/CustomHeader";
@@ -7,6 +7,7 @@ import liff from "@line/liff";
 import axios from 'axios';
 
 function Home() {
+  const navigater = useNavigate()
   const [isModalOpen, setModalOpen] = useState(false);
   const [accessToken, setAccessToken] = useState("");
   const [userId, setUserId] = useState("");
@@ -15,29 +16,34 @@ function Home() {
   // Fetch data from the API
   const getData = async (inUserId, inAccessToken) => {
     const apiURL = "https://func-nitari-backend.azurewebsites.net/api/diary/all";
-    try {
-      const response = await axios.get(`${apiURL}?userId=${inUserId}`, {
-        headers: {
-          'Accept': 'application/json',
-          'Authorization': inAccessToken,
-        }
-      });
+    await axios.get(`${apiURL}?userId=${inUserId}`, {
+      headers: {
+        'Accept': 'application/json',
+        'Authorization': inAccessToken,
+      }
+    })
+    .then((response => {
+      console.log(response)
       setData(prevData => [...prevData, ...response.data]);
-    } catch (error) {
-      console.error('Error:', error.response || error);
-    }
+    }))
+    .catch((error) => {
+      console.error(error)
+    });
   };
 
+  async function init() {
+    const value = await liff.getAccessToken();
+    setAccessToken(value);
+    const userInfo = await liff.getProfile();
+    setUserId(userInfo.userId);
+    getData(userInfo.userId, value);
+  }
+
   // Initialize data when the component mounts
-  useEffect(() => {
-    async function init() {
-      const value = await liff.getAccessToken();
-      setAccessToken(value);
-      const userInfo = await liff.getProfile();
-      setUserId(userInfo.userId);
-      getData(userInfo.userId, value);
-    }
-    init();
+  useEffect(async () => {
+    const authInfo = liff.getProfile()
+    const isLogined = await liff.isLoggedIn(authInfo.userId)
+    await init();
   }, []);
 
   // Toggle modal open/close
