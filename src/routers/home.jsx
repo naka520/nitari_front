@@ -10,7 +10,7 @@ function Home() {
   const [resultmessage, setResultmessage] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [userId, setUserId] = useState("");
-  const [data, setData] = useState(null);
+  const [data, setData] = useState([]);
 
   const getData = async (inUserId, inAccessToken) => {
     const apiURL = "https://func-nitari-backend.azurewebsites.net/api/diary/all";
@@ -22,8 +22,8 @@ function Home() {
                 'Authorization': inAccessToken,
             }
         });
-        const data = await response.json();
-        setData(data);
+        const result = await response.json();
+        setData([...data, result]);
     } catch (error) {
         console.error('Error:', error);
     }
