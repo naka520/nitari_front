@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const Notice = ({ isModalOpen, toggleModal, accessToken }) => {
+const Notice = ({ isModalOpen, toggleModal, accessToken, userId }) => {
   const [entries, setEntries] = useState([{ activity: '', feeling: '' }]);
   const [userId, setUserId] = useState(''); // userIdのstateを追加
   const [date, setDate] = useState(''); // dateのstateを追加
+  const [isLoading, setIsLoading] = useState(false);
 
   const addEntry = () => {
     setEntries([...entries, { activity: '', feeling: '' }]);
@@ -37,10 +38,9 @@ const Notice = ({ isModalOpen, toggleModal, accessToken }) => {
     return '' + yyyy + mm + dd;
   }
 
-var today = getToday();
-console.log(today);
-
   const postEntity = async () => {
+    setIsLoading(true);
+
     // const token = 'YOUR_ACCESS_TOKEN_HERE'; // 事前に取得したアクセストークン
     const url = 'https://func-nitari-backend.azurewebsites.net/api/diary'; // POSTするAPIのエンドポイント
     const date = getToday();
@@ -51,15 +51,18 @@ console.log(today);
       date: date,
     }, {
       headers: {
-        'Authorization': accessToken, // bearerは不要とのことなので直接tokenをセット
+        'Authorization': accessToken,
         'Content-Type': 'application/json',
       }
     })
     .then((response) => {
       console.log('Success:', response.data);
+      setIsLoading(false);
       toggleModal(); // モーダルを閉じるなど、成功した後の処理
     })
     .catch((error) => {
+      setIsLoading(false);
+      alert("作成に失敗しました");
       console.error('Error posting entity:', error);
     })
     
@@ -99,9 +102,20 @@ console.log(today);
                 <button onClick={addEntry} className="bg-blue-500 text-white p-2 rounded">
                   追加
                 </button>
-                <button onClick={() => postEntity} className="bg-green-500 text-white p-2 rounded ml-4">
-                  日報を投稿
-                </button>
+                <div>
+                  {isLoading ? (
+                    <div className="flex justify-center items-center">
+                      <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+                    </div>
+                  ) : (
+                    <>
+                      <button onClick={() => postEntity} className="bg-green-500 text-white p-2 rounded ml-4">
+                        日報を投稿
+                      </button>
+                    </>
+                  )}
+                </div>
+                
               </div>
             </div>
           </div>
