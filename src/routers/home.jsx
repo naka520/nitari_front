@@ -27,7 +27,6 @@
 // }
 
 // export default Home;
-import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import DiaryCardList from '../components/DiaryCardList';
 import Header from "../components/header/CustomHeader";
@@ -67,9 +66,11 @@ function Home() {
             <button onClick={toggleModal} className="px-4 py-2 w-full text-center bg-blue-500 text-white rounded-full hover:bg-blue-600 transition duration-300">
               作成
             </button>
-            <Link to="/" className="px-4 py-2 w-full text-center bg-red-500 text-white rounded-full hover:bg-red-600 transition duration-300">
-              Login
+            <button className="px-4 py-2 w-full text-center bg-red-500 text-white rounded-full hover:bg-red-600 transition duration-300">
+            <Link to="/" >
+              ログイン
             </Link>
+            </button>
           </div>
           <DiaryCardList />
 
