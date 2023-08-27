@@ -6,7 +6,7 @@ function HamburgerMenu() {
 
   return (
     <div className="relative">
-      <button onClick={() => setIsOpen(!isOpen)} className="focus:outline-none">
+      <button onClick={() => setIsOpen(!isOpen)} className="bg-green400 focus:outline-none">
         <div className="w-6 h-0.5 mb-1 bg-white"></div>
         <div className="w-6 h-0.5 mb-1 bg-white"></div>
         <div className="w-6 h-0.5 bg-white"></div>
