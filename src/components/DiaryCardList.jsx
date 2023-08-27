@@ -1,21 +1,24 @@
 import React from 'react';
 import DiaryCard from './DiaryCard';
-import { useEffect } from 'react';
 
 const DiaryCardList = ({ data }) => {
-
     return (
         <>
-            {data.map((item, index) => (
-                <DiaryCard
-                className="border"
-                date={item.date}
-                detail={item.description}
-                />
-            ))}
+            { data !== null ? (
+                <>
+                    {data.map((item, index) => (
+                        <DiaryCard
+                            key={index}  // keyを追加
+                            date={item.date}
+                            detail={item.description}
+                        />
+                    ))}
+                </>
+            ) : (
+                <div>Loading...</div>
+            )}
         </>
     );
 };
-
 
 export default DiaryCardList;
