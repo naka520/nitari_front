@@ -32,17 +32,32 @@ import { Link } from "react-router-dom";
 import DiaryCardList from '../components/DiaryCardList';
 import Header from "../components/header/CustomHeader";
 import Notice from '../components/Notice'; // Notice.jsxをインポート
+import { useEffect } from "react";
+import liff from "@line/liff";
 
 function Home() {
   const [isModalOpen, setModalOpen] = useState(false);
+  const[resultmessage,setResultmessage]=useState("");
+  const[accessToken,setAccessToken] =useState("");
+
+  useEffect(() => {
+    const value = liff.getAccessToken()
+    setAccessToken(value);
+  })
+
 
   const toggleModal = () => {
     setModalOpen(!isModalOpen);
   };
-
+//   const accessToken = liff.getAccessToken();
+  console.log("ok");
+  console.log(accessToken);
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
+      <div>
+        {accessToken}
+      </div>
       <div className="flex flex-col items-center justify-center flex-1 bg-gradient-to-r from-blue-400 to-purple-500 p-4 lg:p-0">
         <div className="w-full max-w-2xl">
           <div className="flex flex-col lg:flex-row justify-between items-center">

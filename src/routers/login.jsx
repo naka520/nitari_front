@@ -37,16 +37,25 @@ function Login() {
         .login()
         .then(() => {
         // ログイン成功
-        setRoute('notifications'); // リダイレクト
+            getAccessToken(); //
+            setRoute('notifications'); // リダイレクト
         })
         .catch((err) => {
-        setMessage('LIFF login failed');
-        setError(err.toString());
+            setMessage('LIFF login failed');
+            setError(err.toString());
         });
     }
     };
 
-   
+    const getAccessToken = () => {
+        if (liff.isLoggedIn()) {
+          // ログインしている場合はアクセストークンを取得
+            const accessToken = liff.getAccessToken();
+            console.log("Your Access Token:", accessToken);
+            localStorage.setItem("lineAccessToken", accessToken);
+        }
+    }
+
     return (
         <div className="flex flex-col items-center justify-center h-screen bg-gray-200">
             <div className="bg-white p-10 rounded-lg shadow-md">
