@@ -25,7 +25,6 @@ button {
   padding: 15px 30px;
   margin: 10px;
   font-size: 1.2rem;
-  background-color: #9df9d4;
   color: white;
   border: none;
   border-radius: 5px;
@@ -57,4 +56,8 @@ a {
 .myCalendar {
   width: 80%;  /* あるいはあなたが望む任意のパーセンテージやピクセル値 */
   margin: 0 auto;  /* カレンダーをページの中央に配置 */
+}
+
+.Notice{
+  background-color: #faf7f4;
 }

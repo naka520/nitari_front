@@ -9,7 +9,7 @@
 
 @font-face {
   font-family: 'MyHeaderFont';
-  src: url('./Courgette/Courgette.ttf') format('truetype');
+  src: url('./courgette/Courgette.ttf') format('truetype');
 }
 body{
   font-family: 'MyFont', sans-serif;

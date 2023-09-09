@@ -8,6 +8,8 @@ import axios from "axios";
 import '../index.css';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import jaLocale from '@fullcalendar/core/locales/ja';
+
 
 function Home() {
   const navigater = useNavigate()
@@ -101,7 +103,15 @@ function Home() {
       <Header />
       <div className="">
         <div className=" ">
-          <h2 className="myFont text-4xl  mb-8 lg:mb-0 font-bold pl-6">Calender</h2>
+          <div className="flex items-center justify-between pl-6 pr-4">
+            <h2 className="myFont text-4xl mb-8 lg:mb-0 font-bold">カレンダー</h2>
+            <button 
+            onClick={toggleModal} 
+            className="myFont font-bold px-2 py-1 text-black text-center  border-2 border-dashed border-black rounded transition duration-300 "
+            >
+              日報を生成する
+            </button>
+          </div>
           <div className="w-full  flex-grow ">
         <div className="myFont font-bold pr-6 pl-6">
           <FullCalendar
@@ -110,17 +120,12 @@ function Home() {
             className="mycalender"
             contentHeight={500}
             aspectRatio={1.5}
+            locale={jaLocale}
           />
         </div>
 
     </div>
           <div className="flex space-x-4 mb-8 mt-4">
-            {/* <button onClick={toggleModal} className="myFont px-4 py-2 w-full text-center bg-blue-500 text-white rounded-full hover:bg-blue-600 transition duration-300">
-              Create
-            </button>
-            <Link to="/" className="myFont px-4 py-2 w-full text-center bg-red-500 text-white rounded-full hover:bg-red-600 transition duration-300">
-              Login
-            </Link> */}
           </div>
           <DiaryCardList className="font-black"data={data} />
 
