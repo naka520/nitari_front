@@ -4,13 +4,15 @@ import DiaryCardList from '../components/DiaryCardList';
 import Header from "../components/header/CustomHeader";
 import Notice from '../components/Notice'; 
 import liff from "@line/liff";
-import axios from 'axios';
+import axios from "axios";
 import '../index.css';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 
 function Home() {
   const navigater = useNavigate()
+  const liffId = import.meta.env.VITE_LIFF_ID;
+
   const [isModalOpen, setModalOpen] = useState(false);
   const [accessToken, setAccessToken] = useState("");
   const [userId, setUserId] = useState("");
@@ -18,10 +20,10 @@ function Home() {
 
   // Fetch data from the API
   const getData = async (inUserId, inAccessToken) => {
-    const apiURL = "https://func-nitari-backend.azurewebsites.net/api/diary/all";
-    await axios.get(`${apiURL}?userId=${inUserId}`, {
+    const apiURL = "https://func-backend.azurewebsites.netapi/diary/all";
+    axios.get(`${apiURL}?userId=${inUserId}`, {
       headers: {
-        'Accept': 'application/json',
+        'accept': 'application/json',
         'Authorization': inAccessToken,
       }
     })
@@ -34,22 +36,59 @@ function Home() {
     });
   };
 
-  async function init() {
-    const value = await liff.getAccessToken();
-    setAccessToken(value);
-    const userInfo = await liff.getProfile();
-    setUserId(userInfo.userId);
-    getData(userInfo.userId, value);
-  }
+
 
   // Initialize data when the component mounts
   useEffect(() => {
-    async function fetchData() {
-      const authInfo = await liff.getProfile()
-      const isLogined = await liff.isLoggedIn(authInfo.userId)
-      await init();
-    }
-    fetchData();
+    const fetchInitData = async () => {
+      let value;
+      let userInfo;
+
+      try {
+        liff.init({liffId: liffId})
+      } catch (err) {
+        console.error(err)
+      }
+      
+      try {
+        value = await liff.getAccessToken();
+      } catch (err) {
+        console.error("Failed to get access token: ", err);
+        return;
+      }
+  
+      try {
+        userInfo = await liff.getProfile();
+      } catch (err) {
+        console.error("Failed to get user info: ", err);
+        return;
+      }
+      
+      setAccessToken(value);
+      setUserId(userInfo.userId);
+  
+      const apiURL = "https://func-backend.azurewebsites.net/api/diary/all";
+  
+      try {
+        console.log(apiURL)
+        console.log(userInfo.userId)
+        console.log(value)
+
+        const response = await axios.get(`${apiURL}?userId=${userInfo.userId}`, {
+          headers: {
+            "Authorization": value,
+            "accept": "application/json",
+          },
+        });
+        
+        console.log(response);
+        setData(prevData => [...prevData, ...response.data]);
+      } catch (err) {
+        console.error("Failed to fetch data: ", err);
+      }
+    };
+  
+    fetchInitData();
   }, []);
 
   // Toggle modal open/close
@@ -62,14 +101,15 @@ function Home() {
       <Header />
       <div className="">
         <div className=" ">
-          <h2 className="myFont text-4xl  mb-8 lg:mb-0 font-bold">Calender</h2>
+          <h2 className="myFont text-4xl  mb-8 lg:mb-0 font-bold pl-6">Calender</h2>
           <div className="w-full  flex-grow ">
-        <div className="myFont font-bold">
+        <div className="myFont font-bold pr-6 pl-6">
           <FullCalendar
             plugins={[ dayGridPlugin ]}
             initialView="dayGridMonth"
             className="mycalender"
             contentHeight={500}
+            aspectRatio={1.5}
           />
         </div>
 
@@ -82,7 +122,7 @@ function Home() {
               Login
             </Link> */}
           </div>
-          {/* <DiaryCardList data={data} /> */}
+          <DiaryCardList className="font-black"data={data} />
 
           {isModalOpen && (
             <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">

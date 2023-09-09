@@ -7,13 +7,14 @@ function Login() {
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
     const [route, setRoute] = useState('App');
-    const liffId = "2000541888-48gX2n5m";
+    const liffId = import.meta.env.VITE_LIFF_ID;
+    
     
     useEffect(() => {
     console.log("LIFF ID from env:", "2000541888-48gX2n5m"); // これを追加
     liff
         .init({
-        liffId: "2000541888-48gX2n5m", // 環境変数からLIFF IDを取得
+        liffId: liffId, // 環境変数からLIFF IDを取得
         })
         .then(() => {
         setMessage("LIFF init succeeded.");

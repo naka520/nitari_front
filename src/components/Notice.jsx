@@ -34,20 +34,20 @@ const Notice = ({ isModalOpen, toggleModal, accessToken, userId }) => {
     if(mm < 10) {
         mm = '0' + mm;
     } 
-    return '' + yyyy + mm + dd;
+    return yyyy + mm + dd;
   }
 
   const postEntity = async () => {
     setIsLoading(true);
 
     // const token = 'YOUR_ACCESS_TOKEN_HERE'; // 事前に取得したアクセストークン
-    const url = 'https://func-nitari-backend.azurewebsites.net/api/diary'; // POSTするAPIのエンドポイント
+    const url = "https://func-backend.azurewebsites.net/api/diary"; // POSTするAPIのエンドポイント
     const apiDate = getToday(); // 変数名を変更
 
     await axios.post(url, {
       userId: userId,
       tagDiaries: entries,
-      date: apiDate, // useStateのdateではなく、getTodayから取得したdateを使用
+      date: apiDate,
     }, {
       headers: {
         'Content-Type': 'application/json',
@@ -64,7 +64,6 @@ const Notice = ({ isModalOpen, toggleModal, accessToken, userId }) => {
       alert("作成に失敗しました");
       console.error('Error posting entity:', error);
     })
-    
   };
 
   return (
