@@ -1,3 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: 'MyFont';
+  src: url('./shokakisarari/shokakisarari.ttf') format('truetype');
+}
+
+.myFont {
+  font-family: 'MyFont', sans-serif;
+}

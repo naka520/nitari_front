@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import '../../index.css';
 
 function HamburgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,7 +28,7 @@ function Header() {
   return (
     <header className="flex items-center justify-between p-4 ">
       <HamburgerMenu />
-      <h1 className="text-4xl font-semibold text-black transform rotate-3">日報ちゃん</h1>
+      <h1 className="myFont text-5xl text-black " >DayWrite</h1>
       {/* 他のヘッダーコンテンツ */}
     </header>
   );

@@ -5,6 +5,7 @@ import Header from "../components/header/CustomHeader";
 import Notice from '../components/Notice'; 
 import liff from "@line/liff";
 import axios from 'axios';
+import '../index.css';
 
 function Home() {
   const navigater = useNavigate()
@@ -57,14 +58,14 @@ function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
-      <div className="flex flex-col items-center justify-center flex-1 bg-gradient-to-r from-blue-400 to-purple-500 p-4 lg:p-0">
+      <div className="flex flex-col items-center justify-center flex-1 bg-gradient-to-r p-4 lg:p-0">
         <div className="w-full max-w-2xl">
-          <h2 className="text-4xl font-semibold text-white mb-8 lg:mb-0">日報一覧</h2>
+          <h2 className="myFont text-6xl  mb-8 lg:mb-0">List</h2>
           <div className="flex space-x-4 mb-8 mt-4">
-            <button onClick={toggleModal} className="px-4 py-2 w-full text-center bg-blue-500 text-white rounded-full hover:bg-blue-600 transition duration-300">
-              作成
+            <button onClick={toggleModal} className="myFont px-4 py-2 w-full text-center bg-blue-500 text-white rounded-full hover:bg-blue-600 transition duration-300">
+              Create
             </button>
-            <Link to="/" className="px-4 py-2 w-full text-center bg-red-500 text-white rounded-full hover:bg-red-600 transition duration-300">
+            <Link to="/" className="myFont px-4 py-2 w-full text-center bg-red-500 text-white rounded-full hover:bg-red-600 transition duration-300">
               Login
             </Link>
           </div>
