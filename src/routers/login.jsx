@@ -60,9 +60,9 @@ function Login() {
     return (
         <div className="flex flex-col items-center justify-center h-screen">
             <div className="p-10 rounded-lg shadow-md bg-white">
-                <div className="text-2xl text-gray-700 font-bold">DayWrite</div>
+                <div className="text-2xl text-gray-700 font-bold">日報ちゃん</div>
                 <button onClick={handleLogin} className="px-10 py-4 mt-4 ml-2 text-white bg-gray-700 rounded hover:bg-gray-500 transition duration-300">
-                    Login
+                    ログイン
                 </button>
                 {message && <p className="text-base font-bold">{message}</p>}
                 {
@@ -74,8 +74,8 @@ function Login() {
                         </div>
                     ) : (
                         <div className="mt-10">
-                            <Link to="/home" className="rounded-lg px-10 py-4 ml-2 text-white bg-gray-700 rounded hover:bg-gray-500 transition duration-300">
-                                Home
+                            <Link to="/home" className="rounded-lg px-10 py-4 ml-4 text-white bg-gray-700 rounded hover:bg-gray-500 transition duration-300">
+                                ホーム
                             </Link>
                         </div>
                     )

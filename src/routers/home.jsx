@@ -8,6 +8,8 @@ import axios from "axios";
 import '../index.css';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import jaLocale from '@fullcalendar/core/locales/ja';
+
 
 function Home() {
   const navigater = useNavigate()
@@ -102,7 +104,7 @@ function Home() {
       <div className="">
         <div className=" ">
           <div className="flex items-center justify-between pl-6 pr-4">
-            <h2 className="myFont text-4xl mb-8 lg:mb-0 font-bold">Calender</h2>
+            <h2 className="myFont text-4xl mb-8 lg:mb-0 font-bold">カレンダー</h2>
             <button 
             onClick={toggleModal} 
             className="myFont font-bold px-2 py-1 text-black text-center  border-2 border-dashed border-black rounded transition duration-300 "
@@ -118,6 +120,7 @@ function Home() {
             className="mycalender"
             contentHeight={500}
             aspectRatio={1.5}
+            locale={jaLocale}
           />
         </div>
 
