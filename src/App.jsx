@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import liff from "@line/liff";
+import "./index.css";
 import "./App.css";
 import Home from './routers/home';
 import Login from "./routers/login";
@@ -10,8 +11,8 @@ function App() {
 
   return (
       <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home" element={<Home />} />
+        <Route className="myFont" path="/" element={<Login />} />
+        <Route className="myFont" path="/home" element={<Home />} />
       </Routes>
   );
 }

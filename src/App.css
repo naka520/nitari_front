@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-color: #fff7ef;
+  /* background-color: #fff7ef; */
   font-family: 'Arial', sans-serif;
 }
 
@@ -33,9 +33,6 @@ button {
   transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #9df9d4;
-}
 
 p {
   font-size: 1rem;
@@ -53,9 +50,9 @@ a {
   text-decoration: none;
 }
 
-.BackColor{
+/* .BackColor{
   background-color: #fff7ef;
-}
+} */
 
 .myCalendar {
   width: 80%;  /* あるいはあなたが望む任意のパーセンテージやピクセル値 */

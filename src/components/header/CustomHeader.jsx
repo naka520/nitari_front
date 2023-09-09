@@ -7,7 +7,7 @@ function HamburgerMenu() {
 
   return (
     <div className="relative">
-      <button onClick={() => setIsOpen(!isOpen)} >
+      <button className="bg-gray-500" onClick={() => setIsOpen(!isOpen)} >
         <div className="w-6 h-0.5 mb-1 bg-white"></div>
         <div className="w-6 h-0.5 mb-1 bg-white"></div>
         <div className="w-6 h-0.5 bg-white"></div>
@@ -26,7 +26,7 @@ function HamburgerMenu() {
 
 function Header() {
   return (
-    <header className="BackColor flex items-center justify-between p-4 border-b-2 border-dashed border-gray-500 mb-12">
+    <header className="flex items-center justify-between p-4 border-b-2 border-dashed border-gray-500 mb-12">
       <HamburgerMenu />
       <h1 className="myFont text-5xl text-black font-bold">DayWrite</h1>
       {/* 他のヘッダーコンテンツ */}

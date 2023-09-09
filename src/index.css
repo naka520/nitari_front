@@ -11,7 +11,11 @@
   font-family: 'MyHeaderFont';
   src: url('./Courgette/Courgette.ttf') format('truetype');
 }
-
+body{
+  font-family: 'MyFont', sans-serif;
+  /* background-color: #0dfff7; */
+  background-color: #faf7f4;
+}
 .myFont {
   font-family: 'MyFont', sans-serif;
 }

@@ -57,15 +57,15 @@ function Login() {
     }
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen bg-gray-200">
-            <div className="bg-white p-10 rounded-lg shadow-md">
-                <h1 className="font-mono text-2xl text-gray-700">日報ちゃん</h1>
-                <button onClick={handleLogin} className="px-10 py-4 mt-4 ml-2 text-white bg-green-500 rounded hover:bg-gray-700 transition duration-300">
-                    ログイン
+        <div className="flex flex-col items-center justify-center h-screen">
+            <div className="p-10 rounded-lg shadow-md bg-white">
+                <div className="text-2xl text-gray-700 font-bold">DayWrite</div>
+                <button onClick={handleLogin} className="px-10 py-4 mt-4 ml-2 text-white bg-gray-700 rounded hover:bg-gray-500 transition duration-300">
+                    Login
                 </button>
-                {message && <p className="text-base">{message}</p>}
+                {message && <p className="text-base font-bold">{message}</p>}
                 {
-                     error ? (
+                    error ? (
                         <div className="mt-4">
                             <p className="bg-gray-200 p-2 rounded">
                                 <code>{error}</code>
@@ -73,7 +73,7 @@ function Login() {
                         </div>
                     ) : (
                         <div className="mt-10">
-                            <Link to="/home" className="px-10 py-4 ml-2 text-white bg-green-500 rounded hover:bg-gray-700 transition duration-300">
+                            <Link to="/home" className="rounded-lg px-10 py-4 ml-2 text-white bg-gray-700 rounded hover:bg-gray-500 transition duration-300">
                                 Home
                             </Link>
                         </div>
