@@ -6,6 +6,8 @@ import Notice from '../components/Notice';
 import liff from "@line/liff";
 import axios from 'axios';
 import '../index.css';
+import FullCalendar from '@fullcalendar/react';
+import dayGridPlugin from '@fullcalendar/daygrid';
 
 function Home() {
   const navigater = useNavigate()
@@ -56,20 +58,31 @@ function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="BackColor flex flex-col min-h-screen h-auto w-screenn">
       <Header />
-      <div className="flex flex-col items-center justify-center flex-1 bg-gradient-to-r p-4 lg:p-0">
-        <div className="w-full max-w-2xl">
-          <h2 className="myFont text-6xl  mb-8 lg:mb-0">List</h2>
+      <div className="">
+        <div className=" ">
+          <h2 className="myFont text-4xl  mb-8 lg:mb-0 font-bold">Calender</h2>
+          <div className="w-full  flex-grow ">
+        <div >
+          <FullCalendar
+            plugins={[ dayGridPlugin ]}
+            initialView="dayGridMonth"
+            className="mycalender"
+            contentHeight={500}
+          />
+        </div>
+
+    </div>
           <div className="flex space-x-4 mb-8 mt-4">
-            <button onClick={toggleModal} className="myFont px-4 py-2 w-full text-center bg-blue-500 text-white rounded-full hover:bg-blue-600 transition duration-300">
+            {/* <button onClick={toggleModal} className="myFont px-4 py-2 w-full text-center bg-blue-500 text-white rounded-full hover:bg-blue-600 transition duration-300">
               Create
             </button>
             <Link to="/" className="myFont px-4 py-2 w-full text-center bg-red-500 text-white rounded-full hover:bg-red-600 transition duration-300">
               Login
-            </Link>
+            </Link> */}
           </div>
-          <DiaryCardList data={data} />
+          {/* <DiaryCardList data={data} /> */}
 
           {isModalOpen && (
             <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
