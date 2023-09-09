@@ -64,7 +64,7 @@ function Home() {
         <div className=" ">
           <h2 className="myFont text-4xl  mb-8 lg:mb-0 font-bold">Calender</h2>
           <div className="w-full  flex-grow ">
-        <div >
+        <div className="myFont font-bold">
           <FullCalendar
             plugins={[ dayGridPlugin ]}
             initialView="dayGridMonth"
