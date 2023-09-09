@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import '../App.css';
 
 const Notice = ({ isModalOpen, toggleModal, accessToken, userId }) => {
   const [entries, setEntries] = useState([{ activity: '', feeling: '' }]);
@@ -71,10 +72,10 @@ const Notice = ({ isModalOpen, toggleModal, accessToken, userId }) => {
       {isModalOpen && (
         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded p-8">
-            <button onClick={toggleModal} className="float-right">
+            <button onClick={toggleModal} className="float-right myHeaderFont bg-gray-500">
               ✖️
             </button>
-            <div className="p-8 bg-gray-100">
+            <div className="p-8 Notice font-bold border-2 border-dashed border-gray-500">
               <div className="container mx-auto">
                 {entries.map((entry, index) => (
                   <div key={index} className="flex space-x-4 mb-4">
@@ -83,22 +84,22 @@ const Notice = ({ isModalOpen, toggleModal, accessToken, userId }) => {
                       placeholder="Activity"
                       value={entry.activity}
                       onChange={(e) => updateEntry(index, 'activity', e.target.value)}
-                      className="p-2 border rounded w-1/2"
+                      className="p-2 border rounded w-1/2 font-bold border-2 border-dashed border-gray-500"
                     />
                     <input
                       type="text"
                       placeholder="Feeling"
                       value={entry.feeling}
                       onChange={(e) => updateEntry(index, 'feeling', e.target.value)}
-                      className="p-2 border rounded w-1/2"
+                      className="p-2 border rounded w-1/2 font-bold border-2 border-dashed border-gray-500"
                     />
                     <button onClick={() => removeEntry(index)} className="bg-red-500 text-white p-2 rounded">
                       削除
                     </button>
                   </div>
                 ))}
-                <button onClick={addEntry} className="bg-blue-500 text-white p-2 rounded">
-                  追加
+                <button onClick={addEntry} className="font-bold border-2 border-dashed border-gray-500 text-gray-500 p-2 rounded">
+                  項目を追加
                 </button>
                 <div>
                   {isLoading ? (
@@ -108,7 +109,7 @@ const Notice = ({ isModalOpen, toggleModal, accessToken, userId }) => {
                   ) : (
                     <>
                       {/* onClickを修正 */}
-                      <button onClick={postEntity} className="bg-green-500 text-white p-2 rounded ml-4">
+                      <button onClick={postEntity} className="bg-gray-700 text-white p-2 rounded ml-4">
                         日報を投稿
                       </button>
                     </>
