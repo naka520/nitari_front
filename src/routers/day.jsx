@@ -17,8 +17,10 @@ function Day() {
 
   const [isLogined, setIsLogined] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [isCreating, setIsCreating] = useState(false);
   const [dayData, setDayData] = useState(null);
   const [userId, setUserId] = useState("");
+  const [accessToken, setAccessToken] = useState("");
   const [generatedImage, setGeneratedImage] = useState(null);
   // yyyymmdd の値を使用してページの内容を動的に変更することができます
 
@@ -53,46 +55,72 @@ function Day() {
             .then((response => {
               console.log(response)
               setDayData(response.data);
-              setIsLoading(false);
+
+              // get access token
+              try {
+                const value = liff.getAccessToken()
+                setAccessToken(value);
+                setIsLoading(false);
+              } catch (error) {
+                console.error(error)
+                setIsLoading(false);
+              }
+
             }))
             .catch((error) => {
               console.error(error)
+              setIsLoading(false);
             });
           })
           .catch((err) => {
             console.log('error', err);
+            setIsLoading(false);
           });
       })
       .catch((e) => {
-      console.log("LIFF init failed.", e);
+        console.log("LIFF init failed.", e);
+        setIsLoading(false);
       });
   }, []); // useEffect内の処理はコンポーネントのマウント時に1回だけ実行
 
-  const generateImage = async () => {
+  async function generateImage() {
+    let output;
+    setIsCreating(true);
+    // generate image by api
+    console.log("start generating image");
     try{
-      // const output = await replicate.run(
-      //   "stability-ai/stable-diffusion:ac732df83cea7fff18b8472768c88ad041fa750ff7682a21affe81863cbe77e4",
-      //   {
-      //     input: {
-      //       prompt: dayData.description,
-      //       width: 512,
-      //       height: 512,
-      //     }
-      //   }
-      // );
-
-      const output = await replicate.run(
-        "stability-ai/stable-diffusion:ac732df83cea7fff18b8472768c88ad041fa750ff7682a21affe81863cbe77e4",
-        {
-          input: {
-            prompt: "a vision of paradise. unreal engine"
-          }
-        }
-      );
-      console.log(output);
-      setGeneratedImage(output);
+      // prompt: dayData.description,
+      // const response = await axios.post(`http://localhost:7071/api/CreateImage`, {
+      const response = await axios.post(`/api/CreateImage`, {
+        prompt: "今日の出来事を教えてください",
+      });
+      output = response.data;
+      console.log(response.data);
+      console.log("image was generated");
+      setGeneratedImage(response.data);
     } catch (error) {
-      console.error(error);
+      console.error(error)
+      console.error("image was not generated");
+    }
+
+    // upload imageUrl by api
+    // axios version curl -X PATCH "https://func-backend.azurewebsites.net/api/diary/imageurl" -H  "accept: application/json" -H  "Authorization: eyJhbGciOiJIUzI1NiJ9.8yFBfwz1d6XoHf0MXes0QAnbpMsh9OhqJsnboMh7xfZdBXzuVQbJG2e30rRxsSH3oNApfzutiovGaVhMWWqhIMOolBBL8ttX9KKLVZ_xBIcIizfBChUjoKVAmYdYg0o8MMJt54OIlDjSIWjjgHkOgZqsoX4G6RMecxguC2gJHdY.tBspVz3BDlcEg5rJiKufCdoz-CgZdVnmuR_Js4gNh4I" -H  "Content-Type: application/json" -d "{  \"userId\": \"Ua83ada9d0ba5343ce9bd2025195655f7\",  \"date\": \"20230909\",  \"imageUrl\": \"https://pbxt.replicate.delivery/so4COhOfJ2UuByiErWfPYvX66slhZWgBeBFm5NwpIo6qlJFjA/out-0.png\"}"
+    try {
+      await axios.patch(`https://func-backend.azurewebsites.net/api/diary/imageurl`, {
+        userId: userId,
+        date: yyyymmdd,
+        imageUrl: output[0],
+      }, {
+        headers: {
+          'accept': 'application/json',
+          'Authorization': accessToken,
+          'Content-Type': 'application/json',
+        }
+      });
+      console.log("image url was uploaded");
+      setGeneratedImage(output[0]);
+    } catch (error) {
+      console.error(error)
     }
   }
 
@@ -109,12 +137,41 @@ function Day() {
             <h2>userId: {userId}</h2>
 
             {/* async functions button */}
-            <button 
-              // onClick={() => generateImage()}
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Generate Image
-            </button>
+            {
+              dayData.imageUrl === null ? (
+                <>
+                  {
+                    isCreating ? (
+                      <div
+                        className="flex items-center justify-center h-full w-full"
+                      >
+                        Creating...
+                      </div>
+                    ) : (
+
+                      <button 
+                        onClick={() => generateImage()}
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                      >
+                        Generate Image
+                      </button>
+                    )
+                  }
+                  {
+                    generatedImage !== null ? (
+                      <img src={generatedImage} alt="generatedImage" />
+                    ) : (
+                      <div></div>
+                    )
+                  }
+                </>
+              ) : (
+                <>
+                  <img src={dayData.imageUrl} alt="imageUrl" />
+                </>
+              )
+            }
+            
             <h2>dayData: {dayData.description}</h2>
 
           </div>
@@ -125,5 +182,3 @@ function Day() {
 }
 
 export default Day;
-
-
