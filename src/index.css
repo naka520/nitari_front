@@ -1,6 +1,8 @@
+@import "react-datepicker/dist/react-datepicker.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 
 @font-face {
   font-family: 'MyFont';
@@ -9,7 +11,7 @@
 
 @font-face {
   font-family: 'MyHeaderFont';
-  src: url('./Courgette/Courgette.ttf') format('truetype');
+  src: url('./courgette/Courgette.ttf') format('truetype');
 }
 body{
   font-family: 'MyFont', sans-serif;
