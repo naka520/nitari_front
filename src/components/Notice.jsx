@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import '../App.css';
-
+import DatePicker from 'react-datepicker'; 
+import { format } from 'date-fns';
 
 const Notice = ({ isModalOpen, toggleModal, accessToken, userId }) => {
   const [entries, setEntries] = useState([{ activity: '', feeling: '' }]);
-  const [date, setDate] = useState(''); // dateのstateを追加
+  const [date, setDate] =  useState(new Date());; // dateのstateを追加
   const [isLoading, setIsLoading] = useState(false);
 
   const addEntry = () => {
@@ -44,7 +45,7 @@ const Notice = ({ isModalOpen, toggleModal, accessToken, userId }) => {
 
     // const token = 'YOUR_ACCESS_TOKEN_HERE'; // 事前に取得したアクセストークン
     const url = "https://func-backend.azurewebsites.net/api/diary"; // POSTするAPIのエンドポイント
-    const apiDate = getToday(); // 変数名を変更
+    const apiDate = format(date, 'yyyyMMdd');
 
     await axios.post(url, {
       userId: userId,
@@ -108,6 +109,19 @@ const Notice = ({ isModalOpen, toggleModal, accessToken, userId }) => {
                     <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                   </svg>
                 </button>
+                <div className="mb-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="datepicker">
+                    日付選択:
+                  </label>
+                  <DatePicker 
+                    selected={date} 
+                    onChange={(date) => setDate(date)} 
+                    dateFormat="yyyy/MM/dd"
+                    id="datepicker"
+                    className="p-2 border rounded w-full font-bold border-2 border-dashed border-gray-500"
+                    maxDate={new Date()}
+                  />
+                </div>
                 <div>
                   {isLoading ? (
                     <div className="flex justify-center items-center">
