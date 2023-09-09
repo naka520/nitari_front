@@ -4,7 +4,15 @@ import '../../index.css';
 
 function HamburgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
-
+  const handleLogout = async () => {
+    try {
+      setIsOpen(false); // モーダルを閉じる
+      await liff.logout(); // ユーザーをログアウトさせる
+      window.location.href = "/"; // ホームページにリダイレクト
+    } catch (error) {
+      console.error('Logout failed', error);
+    }
+  };
   return (
     <div className="relative">
       <button className="bg-gray-500" onClick={() => setIsOpen(!isOpen)} >
@@ -16,7 +24,7 @@ function HamburgerMenu() {
         <div className="myFont absolute top-full left-0 w-48 bg-white rounded shadow-lg">
           <Link to="/home" onClick={() => setIsOpen(false)} className="block px-4 py-2 border-slate-300 font-bold">ホーム</Link>
           <Link to="/" onClick={() => setIsOpen(false)} className="block px-4 py-2 font-bold">今週の日報</Link>
-          <Link to="/" onClick={() => setIsOpen(false)} className="block px-4 py-2 font-bold">ログアウト</Link>
+          <Link to="/" onClick={handleLogout} className="block px-4 py-2 font-bold">ログアウト</Link>
           {/* 他のリンクもこちらに追加 */}
         </div>
       )}

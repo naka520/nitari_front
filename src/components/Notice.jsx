@@ -43,6 +43,13 @@ const Notice = ({ isModalOpen, toggleModal, accessToken, userId }) => {
   const postEntity = async () => {
     setIsLoading(true);
 
+    const validEntries = entries.filter(entry => entry.activity.trim() !== '' && entry.feeling.trim() !== '');
+    if (validEntries.length === 0) {
+      alert("少なくとも1つのエントリーにデータを入力してください。");
+      setIsLoading(false);
+      return;
+    }
+
     // const token = 'YOUR_ACCESS_TOKEN_HERE'; // 事前に取得したアクセストークン
     const url = "https://func-backend.azurewebsites.net/api/diary"; // POSTするAPIのエンドポイント
     const apiDate = format(date, 'yyyyMMdd');
