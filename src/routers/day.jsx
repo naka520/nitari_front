@@ -176,7 +176,7 @@ function Day() {
                               >
                                 {/* display src/no-image.jpg by relative path */}
                                 <img
-                                src="/src/no-image.jpg"
+                                  src="./src/no-image.jpg"
                                   alt="no-image" 
                                   className="w-1/2 h-1/2"
                                 />
