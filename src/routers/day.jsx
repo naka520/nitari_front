@@ -97,6 +97,7 @@ function Day() {
       output = response.data;
       console.log(response.data);
       console.log("image was generated");
+      setIsCreating(false);
       setGeneratedImage(response.data);
     } catch (error) {
       console.error(error)
@@ -133,46 +134,103 @@ function Day() {
           >Loading...</div>
         ) : (
           <div className="BackColor">
-            <h1>Day: {yyyymmdd}</h1>
-            <h2>userId: {userId}</h2>
+            <div
+              className="text-2xl text-center font-bold mb-4"
+            >
+              日付: {dayData.title}
+            </div>
+            <div
+              className="text-2xl text-center font-bold mb-4"
+            >
+              タイトル: {dayData.date}
+            </div>
 
             {/* async functions button */}
             {
               (dayData.imageUrl === null || dayData.imageUrl === "") ? (
-                <>
+                <div
+                  className="flex items-center justify-center h-full w-full mb-8"
+                >
                   {
                     isCreating ? (
                       <div
-                        className="flex items-center justify-center h-full w-full"
+                        className="flex items-center justify-center h-full w-full text-2xl text-center font-bold"
                       >
                         Creating...
                       </div>
                     ) : (
-
-                      <button 
-                        onClick={() => generateImage()}
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                      >
-                        Generate Image
-                      </button>
+                      <>
+                        {
+                          generatedImage !== null ? (
+                            <>
+                              <img
+                                src={generatedImage}
+                                alt="generatedImage"
+                                className="w-1/2 h-1/2"
+                              />
+                            </>
+                          ) : (
+                            <>
+                              <div
+                                className="flex items-center justify-center h-full w-full text-2xl text-center font-bold"
+                              >
+                                {/* display src/no-image.jpg by relative path */}
+                                <img
+                                src="/src/no-image.jpg"
+                                  alt="no-image" 
+                                  className="w-1/2 h-1/2"
+                                />
+                                <button 
+                                  onClick={() => generateImage()}
+                                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-6"
+                                >
+                                  作成
+                                </button>
+                              </div>
+                            </>
+                          )
+                        }
+                      </>
                     )
                   }
-                  {
-                    generatedImage !== null ? (
-                      <img src={generatedImage} alt="generatedImage" />
-                    ) : (
-                      <div></div>
-                    )
-                  }
-                </>
+                </div>
               ) : (
-                <>
-                  <img src={dayData.imageUrl} alt="imageUrl" />
-                </>
+                <div
+                  className="flex items-center justify-center h-full w-full mb-8"
+                >
+                  <img
+                    src={dayData.imageUrl}
+                    alt="imageUrl" 
+                    className="w-1/2 h-1/2 shadow-xl"
+                  />
+                  <div
+                    className=""
+                  >
+                    {/* <button
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-6"
+                    >
+                      共有する
+                    </button> */}
+                    <button
+                      onClick={() => generateImage()}
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-6"
+                    >
+                      再生成
+                    </button>
+                  </div>
+                </div>
               )
             }
             
-            <h2>dayData: {dayData.description}</h2>
+            <div
+              className="text-center mb-4 h-full w-full justify-center items-center flex"
+            >
+              <div
+                className="h-3/4 w-3/4 text-xl font-medium text-center mb-8"
+              >
+                日記: {dayData.description}
+              </div>
+            </div>
 
           </div>
         ) 
