@@ -5,6 +5,8 @@ import { Routes, Route, Link, useParams, useSearchParams } from 'react-router-do
 import axios from "axios";
 import '../index.css';
 import Replicate from "replicate";
+import Header from "../components/header/CustomHeader";
+
 
 function Day() {
   const { yyyymmdd } = useParams();
@@ -173,6 +175,7 @@ function Day() {
 
   return (
     <>
+      <Header />
       {
         dayData === null  ? (
           <div
