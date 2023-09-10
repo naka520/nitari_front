@@ -91,7 +91,7 @@ function Day() {
     try{
       // prompt: dayData.description,
       // const response = await axios.post(`http://localhost:7071/api/CreateImage`, {
-      const response = await axios.post(`http://localhost:7071/api/CreateImage`, {
+      const response = await axios.post(`/api/CreateImage`, {
         prompt: "今日の出来事を教えてください",
       });
       output = response.data;
