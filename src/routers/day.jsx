@@ -138,7 +138,7 @@ function Day() {
 
             {/* async functions button */}
             {
-              dayData.imageUrl === null ? (
+              (dayData.imageUrl === null || dayData.imageUrl === "") ? (
                 <>
                   {
                     isCreating ? (
