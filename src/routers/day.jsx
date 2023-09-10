@@ -9,7 +9,7 @@ import Replicate from "replicate";
 function Day() {
   const { yyyymmdd } = useParams();
   const [searchParams] = useSearchParams();
-  // const userId = searchParams.get("userId");
+  const userId = searchParams.get("userId");
   const liffId = import.meta.env.VITE_LIFF_ID;
   const replicate = new Replicate({
     auth: import.meta.env.VITE_REPLICATE_TOKEN,
@@ -19,7 +19,7 @@ function Day() {
   const [isLoading, setIsLoading] = useState(true);
   const [isCreating, setIsCreating] = useState(false);
   const [dayData, setDayData] = useState(null);
-  const [userId, setUserId] = useState("");
+  // const [userId, setUserId] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [generatedImage, setGeneratedImage] = useState(null);
   // yyyymmdd の値を使用してページの内容を動的に変更することができます
@@ -44,10 +44,10 @@ function Day() {
             console.log(profile.displayName);
             console.log(profile.pictureUrl);
             console.log(profile.statusMessage);
-            setUserId(profile.userId);
+            // setUserId(profile.userId);
 
             // axios version (curl -X GET "https://func-backend.azurewebsites.net/api/diary?userId=Ua83ada9d0ba5343ce9bd2025195655f7&date={yyyymmdd}" -H  "accept: application/json")
-            axios.get(`https://func-backend.azurewebsites.net/api/diary?userId=${profile.userId}&date=${yyyymmdd}`, {
+            axios.get(`https://func-backend.azurewebsites.net/api/diary?userId=${userId}&date=${yyyymmdd}`, {
               headers: {
                 'accept': 'application/json',
               }
@@ -69,11 +69,40 @@ function Day() {
             }))
             .catch((error) => {
               console.error(error)
-              setIsLoading(false);
+              // axios version (curl -X GET "https://func-backend.azurewebsites.net/api/diary?userId=Ua83ada9d0ba5343ce9bd2025195655f7&date={yyyymmdd}" -H  "accept: application/json")
+              axios.get(`https://func-backend.azurewebsites.net/api/diary?userId=${userId}&date=${yyyymmdd}`, {
+                headers: {
+                  'accept': 'application/json',
+                }
+              })
+              .then((response => {
+                console.log(response)
+                setDayData(response.data);
+                setIsLoading(false);
+              }))
+              .catch((error) => {
+                console.error(error)
+                setIsLoading(false);
+              });
             });
           })
           .catch((err) => {
             console.log('error', err);
+            // axios version (curl -X GET "https://func-backend.azurewebsites.net/api/diary?userId=Ua83ada9d0ba5343ce9bd2025195655f7&date={yyyymmdd}" -H  "accept: application/json")
+            axios.get(`https://func-backend.azurewebsites.net/api/diary?userId=${userId}&date=${yyyymmdd}`, {
+              headers: {
+                'accept': 'application/json',
+              }
+            })
+            .then((response => {
+              console.log(response)
+              setDayData(response.data);
+              setIsLoading(false);
+            }))
+            .catch((error) => {
+              console.error(error)
+              setIsLoading(false);
+            });
             setIsLoading(false);
           });
       })
@@ -102,6 +131,8 @@ function Day() {
     } catch (error) {
       console.error(error)
       console.error("image was not generated");
+      confirm("画像の生成を行える権限がありません。")
+      setIsCreating(false);
     }
 
     // upload imageUrl by api
@@ -122,13 +153,28 @@ function Day() {
       setGeneratedImage(output[0]);
     } catch (error) {
       console.error(error)
+      setIsLoading(false);
+    }
+  }
+
+  function copyToClipboard() {
+    const currentUrl = window.location.href;
+
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(currentUrl).then(() => {
+        confirm("URLがクリップボードにコピーされました。");
+      }, (err) => {
+        console.error("クリップボードのコピーに失敗しました:", err);
+      });
+    } else {
+      console.warn("ブラウザはクリップボード API をサポートしていません。");
     }
   }
 
   return (
     <>
       {
-        isLoading ? (
+        dayData === null  ? (
           <div
             className="flex items-center justify-center h-screen w-screen"
           >Loading...</div>
@@ -204,13 +250,14 @@ function Day() {
                     className="w-1/2 h-1/2 shadow-xl"
                   />
                   <div
-                    className=""
+                    className="inline-block align-bottom text-center"
                   >
-                    {/* <button
+                    <button
+                      onClick={copyToClipboard}
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-6"
                     >
                       共有する
-                    </button> */}
+                    </button>
                     <button
                       onClick={() => generateImage()}
                       className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-6"

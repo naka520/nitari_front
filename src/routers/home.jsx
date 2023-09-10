@@ -124,7 +124,7 @@ function Home() {
     console.log("Clicked Event Date:", yyyymmdd);
     
     console.log("Navigating to:", `/day/${yyyymmdd}`);
-    navigate(`/day/${yyyymmdd}`);
+    navigate(`/day/${yyyymmdd}?userId=${userId}`);
   };
 
   return (
