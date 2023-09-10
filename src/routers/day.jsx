@@ -119,8 +119,8 @@ function Day() {
     console.log("start generating image");
     try{
       // prompt: dayData.description,
-      // const response = await axios.post(`http://localhost:7071/api/CreateImage`, {
-      const response = await axios.post(`/api/CreateImage`, {
+      // const response = await axios.post(`/api/CreateImage`, {
+      const response = await axios.post(`http://localhost:7071/api/CreateImage`, {
         prompt: dayData.description,
       });
       output = response.data;
@@ -250,20 +250,25 @@ function Day() {
                     className="w-1/2 h-1/2 shadow-xl"
                   />
                   <div
-                    className="inline-block align-bottom text-center"
+                    className=""
                   >
-                    <button
-                      onClick={copyToClipboard}
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-6"
-                    >
-                      共有する
-                    </button>
-                    <button
-                      onClick={() => generateImage()}
-                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-6"
-                    >
-                      再生成
-                    </button>
+                    <div>
+                      <button
+                        onClick={copyToClipboard}
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-6"
+                      >
+                        共有する
+                      </button>
+                    </div>
+                    <div>
+                      <button
+                        onClick={() => generateImage()}
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-6"
+                      >
+                        再生成
+                      </button>
+                    </div>
+
                   </div>
                 </div>
               )
