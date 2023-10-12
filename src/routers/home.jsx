@@ -62,7 +62,7 @@ function Home() {
         });
         
         setData(prevData => [...prevData, ...response.data]);
-        console.log(response.data);
+        // console.log(response.data);
       } catch (err) {
         console.error("Failed to fetch data: ", err);
       }
@@ -85,14 +85,14 @@ function Home() {
     }
 
     const yyyymmdd = format(clickedDate, 'yyyyMMdd');
-    console.log("Clicked Date:", yyyymmdd);  // ここでクリックした日付をログ出力
+    // console.log("Clicked Date:", yyyymmdd);  // ここでクリックした日付をログ出力
 
     // データが存在するかどうかを確認
     const hasDataForDate = data.some(entry => entry.date === yyyymmdd);
-    console.log("Has Data for the Date:", hasDataForDate);  // ここでデータの存在をログ出力
+    // console.log("Has Data for the Date:", hasDataForDate);  // ここでデータの存在をログ出力
 
     if (hasDataForDate) {
-      console.log("Navigating to:", `/day/${yyyymmdd}`);  // ここでナビゲートするURLをログ出力
+    //   console.log("Navigating to:", `/day/${yyyymmdd}`);  // ここでナビゲートするURLをログ出力
       navigate(`/day/${yyyymmdd}`);
     } else {
       if (window.confirm("この日には日記データがありません。新しい日報を作成しますか？")) {
@@ -124,9 +124,9 @@ function Home() {
     }
 
     const yyyymmdd = format(clickedEventDate, 'yyyyMMdd');
-    console.log("Clicked Event Date:", yyyymmdd);
+    // console.log("Clicked Event Date:", yyyymmdd);
     
-    console.log("Navigating to:", `/day/${yyyymmdd}`);
+    // console.log("Navigating to:", `/day/${yyyymmdd}`);
     navigate(`/day/${yyyymmdd}?userId=${userId}`);
   };
 
