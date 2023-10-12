@@ -64,7 +64,7 @@ function Login() {
                 <button onClick={handleLogin} className="px-10 py-4 mt-4 ml-2 text-white bg-gray-700 rounded hover:bg-gray-500 transition duration-300">
                     ログイン
                 </button>
-                {message && <p className="text-base font-bold">{message}</p>}
+                {/* {message && <p className="text-base font-bold">{message}</p>} */}
                 {
                     error ? (
                         <div className="mt-4">
