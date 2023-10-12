@@ -1,51 +1,58 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState} from "react";
 import liff from "@line/liff";
 import Home from './home';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link,useNavigate  } from 'react-router-dom';
 
 function Login() {
     const [message, setMessage] = useState("");
     const [error, setError] = useState("");
     const [route, setRoute] = useState('App');
     const liffId = import.meta.env.VITE_LIFF_ID;
+    const navigate = useNavigate(); 
     
     
     useEffect(() => {
     // console.log("LIFF ID from env:", "2000541888-48gX2n5m"); // これを追加
     liff
         .init({
-        liffId: liffId, // 環境変数からLIFF IDを取得
+            liffId: liffId, // 環境変数からLIFF IDを取得
         })
         .then(() => {
-        setMessage("LIFF init succeeded.");
-        // console.log("LIFF ID from env:", "2000541888-48gX2n5m"); // これを追加
-    
-        // 既にログインしているか確認
-        if (liff.isLoggedIn()) {
-            setMessage("User already logged in");
-        }
+            setMessage("LIFF init succeeded.");
+            
+            
+            // console.log("LIFF ID from env:", "2000541888-48gX2n5m"); // これを追加
+            
+            // 既にログインしているか確認
+            if (liff.isLoggedIn()) {
+                setMessage("User already logged in");
+                navigate("/home");
+                
+            }
         })
         .catch((e) => {
-        setMessage("LIFF init failed.");
-        setError(`Error: ${JSON.stringify(e)}`);
+            setMessage("LIFF init failed.");
+            setError(`Error: ${JSON.stringify(e)}`);
         });
     }, []); // useEffect内の処理はコンポーネントのマウント時に1回だけ実行
     
     const handleLogin = () => {
-    if (!liff.isLoggedIn()) {
-        // ログインしていない場合は、ログイン画面に遷移
-        liff
-        .login()
-        .then(() => {
-        // ログイン成功
-            getAccessToken(); //
-            setRoute('notifications'); // リダイレクト
-        })
-        .catch((err) => {
-            setMessage('LIFF login failed');
-            setError(err.toString());
-        });
-    }
+        if (!liff.isLoggedIn()) {
+            // ログインしていない場合は、ログイン画面に遷移
+            liff
+            .login()
+            .then(() => {
+            // ログイン成功
+                getAccessToken(); //
+                
+                // リダイレクト
+                
+            })
+            .catch((err) => {
+                setMessage('LIFF login failed');
+                setError(err.toString());
+            });
+        }
     };
 
     const getAccessToken = () => {
@@ -64,7 +71,7 @@ function Login() {
                 <button onClick={handleLogin} className="px-10 py-4 mt-4 ml-2 text-white bg-gray-700 rounded hover:bg-gray-500 transition duration-300">
                     ログイン
                 </button>
-                {message && <p className="text-base font-bold">{message}</p>}
+                {/* {message && <p className="text-base font-bold">{message}</p>} */}
                 {
                     error ? (
                         <div className="mt-4">
