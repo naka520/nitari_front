@@ -41,11 +41,11 @@ function Day() {
         // get liff user profile
         liff.getProfile()
           .then((profile) => {
-            console.log(profile);
-            console.log(profile.userId);
+            // console.log(profile);
+            // console.log(profile.userId);
             console.log(profile.displayName);
-            console.log(profile.pictureUrl);
-            console.log(profile.statusMessage);
+            // console.log(profile.pictureUrl);
+            // console.log(profile.statusMessage);
             // setUserId(profile.userId);
 
             // axios version (curl -X GET "https://func-backend.azurewebsites.net/api/diary?userId=Ua83ada9d0ba5343ce9bd2025195655f7&date={yyyymmdd}" -H  "accept: application/json")

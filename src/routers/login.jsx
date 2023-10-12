@@ -11,14 +11,14 @@ function Login() {
     
     
     useEffect(() => {
-    console.log("LIFF ID from env:", "2000541888-48gX2n5m"); // これを追加
+    // console.log("LIFF ID from env:", "2000541888-48gX2n5m"); // これを追加
     liff
         .init({
         liffId: liffId, // 環境変数からLIFF IDを取得
         })
         .then(() => {
         setMessage("LIFF init succeeded.");
-        console.log("LIFF ID from env:", "2000541888-48gX2n5m"); // これを追加
+        // console.log("LIFF ID from env:", "2000541888-48gX2n5m"); // これを追加
     
         // 既にログインしているか確認
         if (liff.isLoggedIn()) {
@@ -52,7 +52,7 @@ function Login() {
         if (liff.isLoggedIn()) {
           // ログインしている場合はアクセストークンを取得
             const accessToken = liff.getAccessToken();
-            console.log("Your Access Token:", accessToken);
+            // console.log("Your Access Token:", accessToken);
             localStorage.setItem("lineAccessToken", accessToken);
         }
     }
