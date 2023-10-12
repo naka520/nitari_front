@@ -20,15 +20,45 @@ function Home() {
   const [accessToken, setAccessToken] = useState("");
   const [userId, setUserId] = useState("");
   const [data, setData] = useState([]);
+  
 
   useEffect(() => {
+    liff
+        .init({
+            liffId: liffId, // 環境変数からLIFF IDを取得
+        })
+        .then(() => {
+            
+            // console.log("LIFF ID from env:", "2000541888-48gX2n5m"); // これを追加
+            
+            // 既にログインしているか確認
+            if (!liff.isLoggedIn()) {
+                navigate("/");
+                
+            }
+        })
+        .catch((e) => {
+            setError(`Error: ${JSON.stringify(e)}`);
+        });
     const fetchInitData = async () => {
       if (!liff.isLoggedIn()) {
-        navigate("../");
-    }
+        navigate("/");
+      }
+      console.log("liffId:", liffId);
+      
+      try {
+        liff.isLoggedIn()
+      }
+      catch (e) {
+        console.error(e);
+      }
+      
+      if (!liff.isLoggedIn()) {
+        navigate("/");
+      }
+      
       let value;
       let userInfo;
-
       try {
         liff.init({liffId: liffId});
       } catch (err) {
@@ -41,7 +71,7 @@ function Home() {
         console.error("Failed to get access token: ", err);
         return;
       }
-  
+
       try {
         userInfo = await liff.getProfile();
       } catch (err) {
@@ -51,7 +81,7 @@ function Home() {
       
       setAccessToken(value);
       setUserId(userInfo.userId);
-  
+
       const apiURL = "https://func-backend.azurewebsites.net/api/diary/all";
       try {
         const response = await axios.get(`${apiURL}?userId=${userInfo.userId}`, {
