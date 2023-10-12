@@ -55,7 +55,7 @@ function Day() {
               }
             })
             .then((response => {
-              console.log(response)
+            //   console.log(response)
               setDayData(response.data);
 
               // get access token
@@ -78,7 +78,7 @@ function Day() {
                 }
               })
               .then((response => {
-                console.log(response)
+                // console.log(response)
                 setDayData(response.data);
                 setIsLoading(false);
               }))
@@ -97,7 +97,7 @@ function Day() {
               }
             })
             .then((response => {
-              console.log(response)
+            //   console.log(response)
               setDayData(response.data);
               setIsLoading(false);
             }))
