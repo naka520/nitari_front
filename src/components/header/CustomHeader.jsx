@@ -20,6 +20,7 @@ function HamburgerMenu() {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  
   const handleLogout = async () => {
     try {
       setIsOpen(false); // モーダルを閉じる

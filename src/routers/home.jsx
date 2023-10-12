@@ -23,6 +23,9 @@ function Home() {
 
   useEffect(() => {
     const fetchInitData = async () => {
+      if (!liff.isLoggedIn()) {
+        navigate("../");
+    }
       let value;
       let userInfo;
 
