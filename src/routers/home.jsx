@@ -122,7 +122,7 @@ function Home() {
 
     if (hasDataForDate) {
       //   console.log("Navigating to:", `/day/${yyyymmdd}`);  // ここでナビゲートするURLをログ出力
-      navigate(`/day/${yyyymmdd}`);
+      navigate(`/day/${yyyymmdd}?userId=${userId}`);
     } else {
       if (
         window.confirm(
