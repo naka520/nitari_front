@@ -55,7 +55,7 @@ function Day() {
               }
             })
             .then((response => {
-            //   console.log(response)
+              console.log(response.data)
               setDayData(response.data);
 
               // get access token
@@ -78,7 +78,7 @@ function Day() {
                 }
               })
               .then((response => {
-                // console.log(response)
+                console.log(response.data)
                 setDayData(response.data);
                 setIsLoading(false);
               }))
@@ -97,7 +97,7 @@ function Day() {
               }
             })
             .then((response => {
-            //   console.log(response)
+              console.log(response.data);
               setDayData(response.data);
               setIsLoading(false);
             }))
@@ -123,7 +123,7 @@ function Day() {
       // prompt: dayData.description,
       // const response = await axios.post(`http://localhost:7071/api/CreateImage`, {
       const response = await axios.post(`/api/CreateImage`, {
-        prompt: dayData.description,
+        prompt: dayData.englishV,
       });
       output = response.data;
       console.log(response.data);
