@@ -41,7 +41,7 @@ function Home() {
       if (!liff.isLoggedIn()) {
         navigate("/");
       }
-      console.log("liffId:", liffId);
+    //   console.log("liffId:", liffId);
 
       try {
         liff.isLoggedIn();
