@@ -5,6 +5,8 @@ import { Routes, Route, Link, useParams, useSearchParams } from 'react-router-do
 import axios from "axios";
 import '../index.css';
 import Replicate from "replicate";
+import Header from "../components/header/CustomHeader";
+
 
 function Day() {
   const { yyyymmdd } = useParams();
@@ -39,11 +41,11 @@ function Day() {
         // get liff user profile
         liff.getProfile()
           .then((profile) => {
-            console.log(profile);
-            console.log(profile.userId);
+            // console.log(profile);
+            // console.log(profile.userId);
             console.log(profile.displayName);
-            console.log(profile.pictureUrl);
-            console.log(profile.statusMessage);
+            // console.log(profile.pictureUrl);
+            // console.log(profile.statusMessage);
             // setUserId(profile.userId);
 
             // axios version (curl -X GET "https://func-backend.azurewebsites.net/api/diary?userId=Ua83ada9d0ba5343ce9bd2025195655f7&date={yyyymmdd}" -H  "accept: application/json")
@@ -53,7 +55,7 @@ function Day() {
               }
             })
             .then((response => {
-              console.log(response)
+            //   console.log(response)
               setDayData(response.data);
 
               // get access token
@@ -76,7 +78,7 @@ function Day() {
                 }
               })
               .then((response => {
-                console.log(response)
+                // console.log(response)
                 setDayData(response.data);
                 setIsLoading(false);
               }))
@@ -95,7 +97,7 @@ function Day() {
               }
             })
             .then((response => {
-              console.log(response)
+            //   console.log(response)
               setDayData(response.data);
               setIsLoading(false);
             }))
@@ -173,6 +175,7 @@ function Day() {
 
   return (
     <>
+      <Header />
       {
         dayData === null  ? (
           <div

@@ -1,9 +1,26 @@
-import { useState } from 'react';
+import { useState,useEffect, useRef  } from 'react';
 import { Link } from 'react-router-dom';
 import '../../index.css';
 
 function HamburgerMenu() {
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef(null);  // 追加
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    // イベントリスナーの追加
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      // イベントリスナーの削除
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+  
   const handleLogout = async () => {
     try {
       setIsOpen(false); // モーダルを閉じる
@@ -14,7 +31,7 @@ function HamburgerMenu() {
     }
   };
   return (
-    <div className="relative">
+    <div className="relative"  ref={menuRef}>
       <button className="bg-gray-500" onClick={() => setIsOpen(!isOpen)} >
         <div className="w-6 h-0.5 mb-1 bg-white"></div>
         <div className="w-6 h-0.5 mb-1 bg-white"></div>
